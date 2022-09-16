@@ -2,6 +2,7 @@ import React                          from 'react';
 import ReactDOM                       from 'react-dom/client';
 import {applyMiddleware, createStore} from 'redux';
 import {Provider}                     from 'react-redux';
+import thunk                          from 'redux-thunk';
 import './index.css';
 import App                            from './App';
 import reportWebVitals                from './reportWebVitals';
@@ -17,7 +18,7 @@ const loggerMiddleware = (store: any) => (next: any) => (action: any) => {
   next(action);
 }
 
-const middleware = applyMiddleware(loggerMiddleware);
+const middleware = applyMiddleware(thunk, loggerMiddleware);
 
 const store = createStore(rootReducer, middleware);
 
