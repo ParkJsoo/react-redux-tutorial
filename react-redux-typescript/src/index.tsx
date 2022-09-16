@@ -1,22 +1,17 @@
 import React           from 'react';
 import ReactDOM        from 'react-dom/client';
 import {createStore}   from 'redux';
+import {Provider}      from 'react-redux';
 import './index.css';
 import App             from './App';
 import reportWebVitals from './reportWebVitals';
 import rootReducer     from './reducers';
-import {Provider}      from 'react-redux';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 const store = createStore(rootReducer);
-
-store.dispatch({
-  type: 'ADD_TODO',
-  text: "USE REDUX"
-})
 
 console.log('store.getState', store.getState());
 
