@@ -1,19 +1,25 @@
-import React           from 'react';
-import ReactDOM        from 'react-dom/client';
-import {createStore}   from 'redux';
-import {Provider}      from 'react-redux';
+import React                          from 'react';
+import ReactDOM                       from 'react-dom/client';
+import {applyMiddleware, createStore} from 'redux';
+import {Provider}                     from 'react-redux';
 import './index.css';
-import App             from './App';
-import reportWebVitals from './reportWebVitals';
-import rootReducer     from './reducers';
+import App                            from './App';
+import reportWebVitals                from './reportWebVitals';
+import rootReducer                    from './reducers';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const store = createStore(rootReducer);
+const loggerMiddleware = (store: any) => (next: any) => (action: any) => {
+  console.log('store', store);
+  console.log('action', action);
+  next(action);
+}
 
-console.log('store.getState', store.getState());
+const middleware = applyMiddleware(loggerMiddleware);
+
+const store = createStore(rootReducer, middleware);
 
 const render = () => root.render(
   <React.StrictMode>
